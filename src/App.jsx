@@ -1,9 +1,6 @@
+import Body from "./components/Body";
 const App = () => {
-  return (
-    <div>
-      <h1>Hello lets build AuraFlix</h1>
-    </div>
-  );
+  return <Body />;
 };
 
 export default App;
