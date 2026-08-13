@@ -2,24 +2,29 @@ import { useRef, useState } from "react";
 import Header from "./Header";
 import { checkValidData } from "../utils/validate";
 import {
-  getAuth,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  updateProfile, // ✅ Added this missing import
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
+
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
   const [errorMessage, setErrorMessage] = useState("");
+
+  // Create refs to read user input values
+  const name = useRef(null); // ✅ Added ref for Full Name input
   const email = useRef(null);
   const password = useRef(null);
+
   const handleButtonClick = () => {
-    //validate form data
+    // Validate form data pattern limits
     const message = checkValidData(email.current.value, password.current.value);
     setErrorMessage(message);
     if (message) return;
 
-    //Sign in /Sign up
     if (!isSignInForm) {
+      // 🚀 Sign Up Process
       createUserWithEmailAndPassword(
         auth,
         email.current.value,
@@ -27,32 +32,35 @@ const Login = () => {
       )
         .then((userCredential) => {
           const user = userCredential.user;
-          console.log(user);
-          // ...
+
+          // ✅ Cleanly update user profile metadata after creation
+          updateProfile(user, {
+            displayName: name.current.value, // Saves what they typed in the input
+            photoURL: "https://githubusercontent.com", // A cool generic placeholder avatar
+          })
+            .then(() => {
+              console.log("Profile updated successfully!");
+              // Note: Body.jsx will automatically handle the navigate("/browse") via onAuthStateChanged
+            })
+            .catch((error) => {
+              setErrorMessage(error.message);
+            });
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" + errorMessage);
-          // ..
+          setErrorMessage(`${error.code} - ${error.message}`);
         });
     } else {
-      //signIn
+      // 🔐 Sign In Process
       signInWithEmailAndPassword(
         auth,
         email.current.value,
         password.current.value,
       )
         .then((userCredential) => {
-          // Signed in
-          const user = userCredential.user;
-          console.log(user);
-          // ...
+          console.log("Logged In:", userCredential.user);
         })
         .catch((error) => {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          setErrorMessage(errorCode + "-" + errorMessage);
+          setErrorMessage(`${error.code} - ${error.message}`);
         });
     }
   };
@@ -60,19 +68,19 @@ const Login = () => {
   const toggleSignInForm = () => {
     setIsSignInForm(!isSignInForm);
   };
+
   return (
     <div>
       <Header />
-      <div className="absolute ">
+      <div className="absolute">
         <img
-          className=""
           src="https://assets.nflxext.com/ffe/siteui/vlv3/0ce6c17e-e188-4f13-aaf2-6366e12ba739/web/GB-en-20260803-TRIFECTA-perspective_57dfa914-f47d-4ecb-86e0-1618d416fb6e_large.jpg"
-          alt=""
+          alt="background"
         />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}
-        className="absolute bg-black/90 w-3/12 my-36 mx-auto right-0 left-0 text-white  p-8 rounded-2xl "
+        className="absolute bg-black/90 w-3/12 my-36 mx-auto right-0 left-0 text-white p-8 rounded-2xl"
       >
         <h1 className="font-bold text-3xl py-4">
           {isSignInForm ? "Sign In" : "Sign Up"}
@@ -80,36 +88,36 @@ const Login = () => {
         {!isSignInForm && (
           <input
             type="text"
+            ref={name} // ✅ Linked the name ref here
             placeholder="Full Name"
             className="m-2 p-4 my-4 w-full bg-gray-800 rounded-lg"
-          ></input>
+          />
         )}
         <input
           type="text"
           ref={email}
           placeholder="Email Address"
-          className="p-4 m-2  my-4 w-full bg-gray-800 rounded-lg"
-        ></input>
-
+          className="p-4 m-2 my-4 w-full bg-gray-800 rounded-lg"
+        />
         <input
           type="password"
           ref={password}
           placeholder="Password"
           className="m-2 p-4 my-4 w-full bg-gray-800 rounded-lg"
-        ></input>
+        />
         <p className="text-red-500 font-bold text-lg ml-3 py-1">
           {errorMessage}
         </p>
         <button
-          className="p-4  mx-2 my-6 bg-red-600 w-full rounded-lg"
+          className="p-4 mx-2 my-6 bg-red-600 w-full rounded-lg font-bold"
           onClick={handleButtonClick}
         >
           {isSignInForm ? "Sign In" : "Sign Up"}
         </button>
-        <p className="p4-4 ml-2 cursor-pointer" onClick={toggleSignInForm}>
+        <p className="p-4 ml-2 cursor-pointer" onClick={toggleSignInForm}>
           {isSignInForm
             ? "New to Netflix? Sign Up Now"
-            : "Already Registered Sign In Now"}
+            : "Already Registered? Sign In Now"}
         </p>
       </form>
     </div>
