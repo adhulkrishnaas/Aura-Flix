@@ -9,11 +9,8 @@ const Login = () => {
   const password = useRef(null);
   const handleButtonClick = () => {
     //validate form data
-
     const message = checkValidData(email.current.value, password.current.value);
-
     setErrorMessage(message);
-
     //Sign in /Sign up
   };
   const toggleSignInForm = () => {
