@@ -1,7 +1,20 @@
 import React from "react";
 
-const VideoTitle = () => {
-  return <div>VideoTitle</div>;
+const VideoTitle = ({ title, overview }) => {
+  return (
+    <div className="pt-36 px-12">
+      <h1 className="text-5xl font-bold">{title}</h1>
+      <p className="py-6 text-m w-1/2">{overview}</p>
+      <div>
+        <button className="bg-gray-500 text-black p-4 px-14 rounded-sm mr-2">
+          Play
+        </button>
+        <button className="bg-gray-500 text-black p-4 px-8 rounded-sm">
+          More Info
+        </button>
+      </div>
+    </div>
+  );
 };
 
 export default VideoTitle;
