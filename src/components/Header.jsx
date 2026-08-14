@@ -3,6 +3,7 @@ import { auth } from "../utils/firebase";
 import { getAuth, signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import { LOGO } from "../utils/constant";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
@@ -21,11 +22,7 @@ const Header = () => {
   return (
     <div className="absolute  px-10 py-6 z-10 w-full bg-linear-to-b from-black flex justify-between">
       <div>
-        <img
-          className="absolute w-50 "
-          src="https://occ.a.nflxso.net/dnmt/api/v6/iL4oJVDYZ8KLSrJ6eG2OwtghbfQ/AAAAAZge2REfWoSoWRs31izjUdgihldMUslSHTdfz-1aT4vVrgJuVByU92G8wIrBkwULJHWjM1khpzW0xWndigQFYViKFpy-pM6NZFnTKEPkpf9hcdSzCyzqBbcouyIpmgVLbodhaeyqCXaS.svg"
-          alt="logo"
-        />
+        <img className="absolute w-50 " src={LOGO} alt="logo" />
       </div>
 
       <div className="flex p-2">
