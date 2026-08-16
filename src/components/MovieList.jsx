@@ -3,18 +3,18 @@ import MovieCard from "./MovieCard";
 import { useSelector } from "react-redux";
 
 const MovieList = ({ title, movies }) => {
-  console.log(movies);
   if (!movies || movies.length === 0) return null;
   return (
-    <div>
-      <div>
-        <h1>{title}</h1>
+    <div className="px-6 text-white bg-black">
+      <div className="className=py-4">
+        <h1 className="text-2xl md:text-2xl font-bold py-4">{title}</h1>
       </div>
-      <div className="flex">
-        {movies.map((movie) => (
-          <MovieCard key={movie.id} posterPath={movie.poster_path} />
-        ))}
-        <MovieCard posterPath={movies[0].poster_path} />
+      <div className="flex overflow-x-scroll no-scrollbar cursor-pointer">
+        <div className="flex gap-4">
+          {movies.map((movie) => (
+            <MovieCard key={movie.id} posterPath={movie.poster_path} />
+          ))}
+        </div>
       </div>
     </div>
   );
