@@ -1,6 +1,6 @@
 import React from "react";
 import { auth } from "../utils/firebase";
-import { getAuth, signOut } from "firebase/auth";
+import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { LOGO } from "../utils/constant";
@@ -12,31 +12,36 @@ const Header = () => {
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
-        // Sign-out successful.
         navigate("/");
       })
       .catch((error) => {
         navigate("/error");
       });
   };
+
   return (
-    <div className="absolute  px-10 py-6 z-10 w-full bg-linear-to-b from-black flex justify-between">
+    <div className="absolute top-0 left-0 px-10 py-6 z-30 w-full bg-gradient-to-b from-black/80 flex justify-between items-center">
       <div>
-        <img className="absolute w-50 " src={LOGO} alt="logo" />
+        <img className="w-40 md:w-50" src={LOGO} alt="logo" />
       </div>
 
-      <div className="flex p-2">
+      <div className="flex p-2 items-center">
         <img
           alt="user-icon"
-          className="w-10 h-10"
-          src="https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png?utm_source=commons.wikimedia.org&utm_campaign=index&utm_content=original"
+          className="w-10 h-10 rounded-md"
+          src={
+            user?.photoURL ||
+            "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+          }
         />
-        <button
-          onClick={handleSignOut}
-          className="px-3 mx-4 bg-red-600 w-full rounded-lg cursor-pointer font-bold"
-        >
-          Signout
-        </button>
+        {user && (
+          <button
+            onClick={handleSignOut}
+            className="px-4 py-2 mx-4 bg-red-600 text-white rounded-md cursor-pointer font-bold hover:bg-red-700 transition duration-200"
+          >
+            Sign Out
+          </button>
+        )}
       </div>
     </div>
   );

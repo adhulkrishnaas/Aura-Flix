@@ -7,7 +7,7 @@ import {
   updateProfile, // ✅ Added this missing import
 } from "firebase/auth";
 import { auth } from "../utils/firebase";
-import { USER_AVATAR } from "../utils/constant";
+import { LOGIN_BG_IMG_URL, USER_AVATAR } from "../utils/constant";
 
 const Login = () => {
   const [isSignInForm, setIsSignInForm] = useState(true);
@@ -74,7 +74,7 @@ const Login = () => {
     <div>
       <Header />
       <div className="absolute">
-        <img src={USER_AVATAR} alt="background" />
+        <img src={LOGIN_BG_IMG_URL} alt="background" />
       </div>
       <form
         onSubmit={(e) => e.preventDefault()}

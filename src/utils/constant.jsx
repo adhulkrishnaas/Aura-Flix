@@ -11,3 +11,6 @@ export const API_OPTIONS = {
   },
 };
 export const IMG_CDN = "https://image.tmdb.org/t/p/w500";
+
+export const LOGIN_BG_IMG_URL =
+  "https://assets.nflxext.com/ffe/siteui/vlv3/ea534f76-b87f-4720-9605-cb29cfd9fefe/web/GB-en-20260810-TRIFECTA-perspective_b4c368b6-212d-42ad-8135-c3aabf1924fd_large.jpg";
