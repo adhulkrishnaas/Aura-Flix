@@ -2,15 +2,18 @@ import React from "react";
 import { auth } from "../utils/firebase";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { LOGO } from "../utils/constant";
+import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSearchGptClick = () => {
     //Toggle Gpt Search page
+    dispatch(toggleGptSearchView());
   };
 
   const handleSignOut = () => {
