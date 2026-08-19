@@ -9,6 +9,10 @@ const Header = () => {
   const user = useSelector((store) => store.user);
   const navigate = useNavigate();
 
+  const handleSearchGptClick = () => {
+    //Toggle Gpt Search page
+  };
+
   const handleSignOut = () => {
     signOut(auth)
       .then(() => {
@@ -26,7 +30,10 @@ const Header = () => {
       </div>
 
       <div className="flex p-2 items-center">
-        <button className="px-4 py-2 mx-4 bg-gray-800 text-white rounded-md cursor-pointer font-bold hover:bg-red-700 transition duration-200">
+        <button
+          onClick={handleSearchGptClick}
+          className="px-4 py-2 mx-4 bg-gray-800 text-white rounded-md cursor-pointer font-bold hover:bg-red-700 transition duration-200"
+        >
           Gpt Search
         </button>
         <img
