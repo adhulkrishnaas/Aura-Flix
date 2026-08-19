@@ -26,6 +26,9 @@ const Header = () => {
       </div>
 
       <div className="flex p-2 items-center">
+        <button className="px-4 py-2 mx-4 bg-gray-800 text-white rounded-md cursor-pointer font-bold hover:bg-red-700 transition duration-200">
+          Gpt Search
+        </button>
         <img
           alt="user-icon"
           className="w-10 h-10 rounded-md"
@@ -34,10 +37,11 @@ const Header = () => {
             "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
           }
         />
+
         {user && (
           <button
             onClick={handleSignOut}
-            className="px-4 py-2 mx-4 bg-red-600 text-white rounded-md cursor-pointer font-bold hover:bg-red-700 transition duration-200"
+            className="px-4 py-2 mx-4 bg-red-600 text-white rounded-md cursor-pointer  hover:bg-red-700 transition duration-200"
           >
             Sign Out
           </button>
