@@ -43,7 +43,7 @@ const Header = () => {
   return (
     <header className="fixed top-0 left-0 right-0 z-50 px-3 sm:px-6 py-3 transition-all duration-300">
       <div
-        className={`max-w-7xl mx-auto rounded-2xl px-4 sm:px-6 py-2.5 flex flex-row items-center justify-between gap-4 transition-all duration-300 border ${
+        className={`max-w-7xl mx-auto rounded-2xl px-3 sm:px-6 py-2.5 flex flex-row items-center justify-between gap-2 sm:gap-4 transition-all duration-300 border ${
           isScrolled
             ? "bg-slate-950/85 backdrop-blur-2xl border-white/15 shadow-[0_10px_30px_rgba(0,0,0,0.8)]"
             : "bg-slate-900/60 backdrop-blur-xl border-white/10 shadow-xl"
@@ -51,14 +51,14 @@ const Header = () => {
       >
         {/* Brand Logo with Iridescent Aura Orb */}
         <div
-          className="flex items-center gap-3 cursor-pointer select-none group"
+          className="flex items-center gap-2 sm:gap-3 cursor-pointer select-none group shrink-0"
           onClick={() => navigate("/browse")}
         >
-          <div className="relative flex items-center justify-center w-9 h-9">
+          <div className="relative flex items-center justify-center w-8 h-8 sm:w-9 sm:h-9">
             <span className="absolute inset-0 rounded-xl bg-gradient-to-tr from-fuchsia-600 via-indigo-500 to-cyan-400 opacity-75 blur-sm group-hover:opacity-100 group-hover:scale-110 transition-all duration-300" />
             <div className="relative w-full h-full rounded-xl bg-slate-950 border border-white/20 flex items-center justify-center overflow-hidden">
               <svg
-                className="w-5 h-5 text-indigo-400 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300"
+                className="w-4 h-4 sm:w-5 sm:h-5 text-indigo-400 group-hover:rotate-12 group-hover:scale-110 transition-all duration-300"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -72,17 +72,17 @@ const Header = () => {
               </svg>
             </div>
           </div>
-          <span className="text-xl font-black tracking-widest text-white group-hover:text-indigo-300 transition-colors duration-300">
+          <span className="text-lg sm:text-xl font-black tracking-widest text-white group-hover:text-indigo-300 transition-colors duration-300">
             AURA
           </span>
         </div>
 
         {/* Navigation & Controls */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Siri/Apple Intelligence Audio Wave Trigger */}
           <button
             onClick={handleSearchGptClick}
-            className={`group relative inline-flex items-center gap-2.5 px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 overflow-hidden cursor-pointer active:scale-95 border ${
+            className={`group relative inline-flex items-center gap-1.5 sm:gap-2.5 px-2.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all duration-300 overflow-hidden cursor-pointer active:scale-95 border ${
               showGptSearch
                 ? "bg-slate-800/90 text-slate-200 border-indigo-500/40 hover:bg-slate-700/90 hover:border-indigo-400/60 shadow-[0_0_15px_rgba(99,102,241,0.2)]"
                 : "text-white border-transparent shadow-[0_0_22px_rgba(168,85,247,0.4)]"
@@ -99,14 +99,12 @@ const Header = () => {
             {/* Dynamic Icon Switcher */}
             <span className="relative z-10 flex items-center justify-center">
               {showGptSearch ? (
-                /* Active Siri Audio Wave Indicator */
                 <span className="flex items-center gap-0.5 h-3.5">
                   <span className="w-0.5 h-3 bg-indigo-400 rounded-full animate-bounce" />
                   <span className="w-0.5 h-2 bg-fuchsia-400 rounded-full animate-bounce [animation-delay:0.15s]" />
                   <span className="w-0.5 h-3.5 bg-cyan-400 rounded-full animate-bounce [animation-delay:0.3s]" />
                 </span>
               ) : (
-                /* Pulsing Orb */
                 <span className="relative flex h-3.5 w-3.5 items-center justify-center">
                   <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-cyan-400 opacity-75" />
                   <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-gradient-to-r from-fuchsia-400 to-cyan-300 shadow-[0_0_8px_#38bdf8]" />
@@ -114,12 +112,11 @@ const Header = () => {
               )}
             </span>
 
-            {/* Button Label */}
-            <span className="relative z-10 tracking-wide">
+            {/* Button Label — hidden on the smallest screens, icon-only there */}
+            <span className="relative z-10 tracking-wide hidden xs:inline sm:inline">
               {showGptSearch ? "Back to Browse" : "Ask Neural AI"}
             </span>
 
-            {/* Shimmer Sweper */}
             {!showGptSearch && (
               <span className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000 ease-in-out" />
             )}
@@ -127,27 +124,38 @@ const Header = () => {
 
           {/* User Profile & Sign Out */}
           {user && (
-            <div className="flex items-center gap-3 pl-3 border-l border-white/10">
-              <div className="relative">
+            <div className="flex items-center gap-2 sm:gap-3 pl-2 sm:pl-3 border-l border-white/10">
+              <div className="relative shrink-0">
                 {user?.photoURL ? (
-                  <div className="relative">
-                    <img
-                      className="w-8 h-8 rounded-full object-cover ring-2 ring-indigo-500/40 shadow-inner"
-                      alt="user-icon"
-                      src={user.photoURL}
-                    />
-                    <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-slate-950" />
-                  </div>
+                  <img
+                    className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover ring-2 ring-indigo-500/40 shadow-inner"
+                    alt="user-icon"
+                    src={user.photoURL}
+                  />
                 ) : (
                   <UserAvatar />
                 )}
-                <span className="absolute bottom-0 right-0 w-2.5 h-2.5 bg-emerald-500 rounded-full ring-2 ring-slate-950" />
+                <span className="absolute bottom-0 right-0 w-2 h-2 sm:w-2.5 sm:h-2.5 bg-emerald-500 rounded-full ring-2 ring-slate-950" />
               </div>
               <button
                 onClick={handleSignOut}
-                className="hidden sm:inline-flex px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-rose-400 bg-white/5 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/30 rounded-full transition-all duration-150 cursor-pointer"
+                aria-label="Sign Out"
+                className="inline-flex items-center justify-center w-7 h-7 sm:w-auto sm:h-auto sm:px-3 sm:py-1.5 text-xs font-semibold text-slate-300 hover:text-rose-400 bg-white/5 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/30 rounded-full transition-all duration-150 cursor-pointer"
               >
-                Sign Out
+                <svg
+                  className="w-3.5 h-3.5 sm:hidden"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15M12 9l3 3-3 3M15 12H3"
+                  />
+                </svg>
+                <span className="hidden sm:inline">Sign Out</span>
               </button>
             </div>
           )}
