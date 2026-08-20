@@ -1,8 +1,6 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Header from "./Header";
-import { API_OPTIONS } from "../utils/constant";
-import { useDispatch, useSelector } from "react-redux";
-import { addNowPlayingMovies } from "../utils/movieSlice";
+import { useSelector } from "react-redux";
 import useNowPlayingMovies from "../hooks/useNowPlayingMovies";
 import MainContainer from "./MainContainer";
 import SecondaryContainer from "./SecondaryContainer";
@@ -19,15 +17,15 @@ const Browse = () => {
   useTopratedMovies();
 
   return (
-    <div>
+    <div className="relative min-h-screen w-full bg-slate-950 text-white overflow-x-hidden">
       <Header />
       {showGptSearch ? (
         <GptSearch />
       ) : (
-        <>
+        <main className="relative z-10">
           <MainContainer />
           <SecondaryContainer />
-        </>
+        </main>
       )}
     </div>
   );
