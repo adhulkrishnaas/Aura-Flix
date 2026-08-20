@@ -12,7 +12,6 @@ const Header = () => {
   const dispatch = useDispatch();
 
   const handleSearchGptClick = () => {
-    //Toggle Gpt Search page
     dispatch(toggleGptSearchView());
   };
 
