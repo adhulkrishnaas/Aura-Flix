@@ -17,7 +17,6 @@ const Browse = () => {
   usePopularMovies();
   useUpcomingMovies();
   useTopratedMovies();
-  const openaiKey = import.meta.env.VITE_OPEN_AI_API_KEY;
 
   return (
     <div>
@@ -41,7 +40,6 @@ const Browse = () => {
 
 
       */}
-      {console.log("Your secure key loaded successfully:", openaiKey)}
     </div>
   );
 };
