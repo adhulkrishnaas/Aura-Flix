@@ -8,6 +8,7 @@ import { toggleGptSearchView } from "../utils/gptSlice";
 
 const Header = () => {
   const user = useSelector((store) => store.user);
+  const showGptSearch = useSelector((store) => store.gpt?.showGptSearch);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -26,37 +27,65 @@ const Header = () => {
   };
 
   return (
-    <div className="absolute top-0 left-0 px-10 py-6 z-30 w-full bg-gradient-to-b from-black/80 flex justify-between items-center">
-      <div>
-        <img className="w-40 md:w-50" src={LOGO} alt="logo" />
-      </div>
-
-      <div className="flex p-2 items-center">
-        <button
-          onClick={handleSearchGptClick}
-          className="px-4 py-2 mx-4 bg-gray-800 text-white rounded-md cursor-pointer font-bold hover:bg-red-700 transition duration-200"
+    <header className="fixed top-0 left-0 right-0 z-50 px-6 py-4 transition-all duration-300">
+      <div className="max-w-7xl mx-auto glass-panel rounded-2xl px-6 py-3 flex flex-col md:flex-row items-center justify-between gap-4 shadow-xl border border-white/10">
+        {/* Brand Logo */}
+        <div
+          className="flex items-center gap-3 cursor-pointer"
+          onClick={() => navigate("/browse")}
         >
-          Gpt Search
-        </button>
-        <img
-          alt="user-icon"
-          className="w-10 h-10 rounded-md"
-          src={
-            user?.photoURL ||
-            "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
-          }
-        />
+          {LOGO ? (
+            <img
+              className="w-32 md:w-36 object-contain"
+              src={LOGO}
+              alt="logo"
+            />
+          ) : (
+            <span className="text-xl font-extrabold tracking-wider bg-gradient-to-r from-white via-slate-200 to-indigo-300 bg-clip-text text-transparent">
+              AURA
+            </span>
+          )}
+        </div>
 
-        {user && (
+        {/* User Navigation Controls */}
+        <div className="flex items-center gap-3">
+          {/* AI Search Toggle CTA */}
           <button
-            onClick={handleSignOut}
-            className="px-4 py-2 mx-4 bg-red-600 text-white rounded-md cursor-pointer  hover:bg-red-700 transition duration-200"
+            onClick={handleSearchGptClick}
+            className={`px-4 py-2 rounded-xl font-medium text-sm transition-all duration-200 flex items-center gap-2 border ${
+              showGptSearch
+                ? "bg-slate-800 text-white border-slate-700 hover:bg-slate-700"
+                : "bg-indigo-600 hover:bg-indigo-500 text-white border-indigo-400/30 shadow-lg shadow-indigo-600/20"
+            }`}
           >
-            Sign Out
+            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+              <path d="M12 2L14.5 9.5L22 12L14.5 14.5L12 22L9.5 14.5L2 12L9.5 9.5L12 2Z" />
+            </svg>
+            {showGptSearch ? "Back to Browse" : "AI Search"}
           </button>
-        )}
+
+          {/* Profile & Sign Out Controls */}
+          {user && (
+            <div className="flex items-center gap-3 pl-3 border-l border-white/10">
+              <img
+                className="w-8 h-8 rounded-lg object-cover ring-2 ring-indigo-500/40"
+                alt="user-icon"
+                src={
+                  user?.photoURL ||
+                  "https://upload.wikimedia.org/wikipedia/commons/0/0b/Netflix-avatar.png"
+                }
+              />
+              <button
+                onClick={handleSignOut}
+                className="px-3 py-1.5 text-xs font-semibold text-slate-300 hover:text-rose-400 bg-white/5 hover:bg-rose-500/10 border border-white/10 hover:border-rose-500/30 rounded-lg transition-all duration-150"
+              >
+                Sign Out
+              </button>
+            </div>
+          )}
+        </div>
       </div>
-    </div>
+    </header>
   );
 };
 
