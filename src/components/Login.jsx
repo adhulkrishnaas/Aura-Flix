@@ -40,7 +40,6 @@ const Login = () => {
             photoURL: "https://githubusercontent.com", // A cool generic placeholder avatar
           })
             .then(() => {
-              console.log("Profile updated successfully!");
               // Note: Body.jsx will automatically handle the navigate("/browse") via onAuthStateChanged
             })
             .catch((error) => {
@@ -57,9 +56,7 @@ const Login = () => {
         email.current.value,
         password.current.value,
       )
-        .then((userCredential) => {
-          console.log("Logged In:", userCredential.user);
-        })
+        .then((userCredential) => {})
         .catch((error) => {
           setErrorMessage(`${error.code} - ${error.message}`);
         });
