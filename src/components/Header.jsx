@@ -130,7 +130,7 @@ const Header = () => {
                   <img
                     className="w-7 h-7 sm:w-8 sm:h-8 rounded-full object-cover ring-2 ring-indigo-500/40 shadow-inner"
                     alt="user-icon"
-                    src={user.photoURL}
+                    src="https://media.istockphoto.com/id/2200526153/vector/simple-user-avatar-symbol-with-dark-circle-background.jpg?s=612x612&w=0&k=20&c=gTdEP9HWwE7LYSVYBFv4sE6syuvGm9hmK4lOCGQDLJI="
                   />
                 ) : (
                   <UserAvatar />
